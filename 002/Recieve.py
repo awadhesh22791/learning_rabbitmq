@@ -10,10 +10,10 @@ if channel.is_open:
         print("[x] Recie4ved %r"%body)
         time.sleep(body.count(b'.'))
         print('[x] Done')
+        ch.basic_ack(delivery_tag=method.delivery_tag)
 
     channel.basic_consume(queue="hello",
-                            on_message_callback=callback,
-                            auto_ack=True)
+                            on_message_callback=callback)
     print('[*] Waiting for messages. To exist CTRL+C')
     channel.start_consuming()
 else:
